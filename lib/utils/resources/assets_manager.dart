@@ -5,10 +5,6 @@ class ImageAssets {
 
 
   static const String vlLogo = "$imagePath/victorylink_logo.png";
-  static const String onBoarding = "$imagePath/into.png";
-  static const String avatarPlaceHolder = "$imagePath/avatar_placeholder.png";
-  static const String login_gc = "$imagePath/login_gc.png";
-  static const String worldIc = "$imagePath/world.png";
 
 
 

@@ -1,14 +1,8 @@
-import 'dart:convert';
 
-import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../utils/resources/assets_manager.dart';
 import '../utils/resources/langauge_manager.dart';
-import '../utils/resources/strings_manager.dart';
 
 const String PREFS_KEY_LANG = "PREFS_KEY_LANG";
 const String PREFS_KEY_ONBOARDING_SCREEN_VIEWED =
