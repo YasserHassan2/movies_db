@@ -1,4 +1,4 @@
-# victory_link_movies
+# movies_db_app
 
 A new Flutter project.
 
