@@ -13,7 +13,7 @@ class _AppServiceClient implements AppServiceClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://test.kafiil.com';
+    baseUrl ??= 'https://api.themoviedb.org';
   }
 
   final Dio _dio;
@@ -21,237 +21,31 @@ class _AppServiceClient implements AppServiceClient {
   String? baseUrl;
 
   @override
-  Future<BaseResponse> login(
-    email,
-    password,
+  Future<PopularMoviesModel> popularMovies(
+    pageNumber,
+    language,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
-      'email': email,
-      'password': password,
+      'page': pageNumber,
+      'language': language,
     };
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BaseResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/test/user/login',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<BaseResponse> registration(
-    firstName,
-    lastName,
-    about,
-    tags,
-    favorite_social_media,
-    salary,
-    password,
-    email,
-    birthDate,
-    gender,
-    typeId,
-    passwordConfirmation,
-    avatar,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = FormData();
-    _data.fields.add(MapEntry(
-      'first_name',
-      firstName,
-    ));
-    _data.fields.add(MapEntry(
-      'last_name',
-      lastName,
-    ));
-    _data.fields.add(MapEntry(
-      'about',
-      about,
-    ));
-    tags.forEach((i) {
-      _data.fields.add(MapEntry('tags[]', i));
-    });
-    favorite_social_media.forEach((i) {
-      _data.fields.add(MapEntry('favorite_social_media[]', i));
-    });
-    _data.fields.add(MapEntry(
-      'salary',
-      salary,
-    ));
-    _data.fields.add(MapEntry(
-      'password',
-      password,
-    ));
-    _data.fields.add(MapEntry(
-      'email',
-      email,
-    ));
-    _data.fields.add(MapEntry(
-      'birth_date',
-      birthDate,
-    ));
-    _data.fields.add(MapEntry(
-      'gender',
-      gender,
-    ));
-    _data.fields.add(MapEntry(
-      'type',
-      typeId,
-    ));
-    _data.fields.add(MapEntry(
-      'password_confirmation',
-      passwordConfirmation,
-    ));
-    _data.files.add(MapEntry(
-      'avatar',
-      MultipartFile.fromFileSync(
-        avatar.path,
-        filename: avatar.path.split(Platform.pathSeparator).last,
-      ),
-    ));
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BaseResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: 'multipart/form-data',
-    )
-            .compose(
-              _dio.options,
-              '/api/test/user/register',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<BaseResponse> countries() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BaseResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<PopularMoviesModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/test/country',
+              '/3/movie/popular',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<BaseResponse> whoAmIData() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BaseResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/test/user/who-am-i',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<BaseResponse> lookupsData() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BaseResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/test/dependencies',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<BaseResponse> services() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BaseResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/test/service',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<BaseResponse> popularServices() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<BaseResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/test/service/popular',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponse.fromJson(_result.data!);
+    final value = PopularMoviesModel.fromJson(_result.data!);
     return value;
   }
 

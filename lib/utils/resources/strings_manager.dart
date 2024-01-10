@@ -17,6 +17,15 @@ class AppStrings {
   static const female = 'female';
 
   //labels
+
+  static const home = "home";
+  static const victoryLinkApp = "victoryLinkApp";
+  static const popularMovies = "popularMovies";
+  static const movies = "movies";
+  static const searchForMovie = "searchForMovie";
+  static const movieDetails = "movieDetails";
+  static const searchHere = "searchHere";
+
   static const gender = "gender";
   static const username = "username_hint";
   static const usernameError = "username_error";

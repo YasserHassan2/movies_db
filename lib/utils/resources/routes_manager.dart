@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:victory_link_movies/presentation/main/main_view.dart';
+import 'package:victory_link_movies/presentation/main/view/main_view.dart';
 import 'package:victory_link_movies/utils/resources/strings_manager.dart';
+
+import '../../app/di.dart';
 
 class Routes {
   static const String mainRoute = "/main";
@@ -11,7 +13,7 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.mainRoute:
-        // initSplashModule();
+        initMainModule();
         return MaterialPageRoute(builder: (_) => const MainView());
       default:
         return unDefinedRoute();

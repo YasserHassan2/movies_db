@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
-  static const Color primary = const Color(0xff1DBF73);
+  static const Color primary = const Color(0xff37306B);
   static const Color secondaryColor = const Color(0xff610C9F);
   static const Color darkGrey = const Color(0xff525252);
   static const Color grey = const Color(0xff737477);
@@ -26,18 +26,18 @@ class ColorManager {
 
   static const Color blackTextColor = const Color(0xff02031A);
   static const Color buttonTextColor = const Color(0xffffffff);
-  static const Color labelsTextColor = const Color(0xff696F79);
+  static const Color labelsTextColor = const Color(0xffFFFFFF);
   static const Color headersTextColor = const Color(0xff696F79);
   static const Color formHintTextColor = const Color(0xffA4A4AD);
   static const Color formLabelTextColor = const Color(0xff676876);
-  static const Color hintTextColor = const Color(0xff9393BB);
+  static const Color hintTextColor = const Color(0xff797979);
   static const Color titlesTextColor = const Color(0xff363778);
   static const Color accentTextColor = const Color(0xffFF862E);
   static const Color supportTextColor = const Color(0xffFDB808);
   static const Color warningTextColor = const Color(0xffFF0B1B);
   static const Color purpleMainTextColor = const Color(0xff7577CD);
   static const Color lineColor = const Color(0xffE1E1E4);
-  static const Color inputFieldBGColor = const Color(0xffF9F9F9);
+  static const Color inputFieldBGColor = const Color(0xff9393BB);
 
   //disable color
 

@@ -1,7 +1,10 @@
 {
   "en": "الانجليزية",
   "ar": "عربي",
-  "app_name": "Kafil Hiring",
+  "app_name": "VLMovies",
+  "popularMovies": "الافلام الاكثر شهرة",
+  "searchForMovie": "اعثر على فيلم",
+  "searchHere": "ابحث هنا",
 
 
   "loading": "جارى التحميل",

@@ -25,8 +25,8 @@ class DioFactory {
 
     String language = await _appPreferences.getAppLanguage();
     Map<String, String> headers = {
-      ACCEPT:APPLICATION_JSON,
-      ACCEPT_LANGUAGE: language
+      ACCEPT: APPLICATION_JSON,
+      AUTHORIZATION: "Bearer ${Constants.accessToken}",
     };
 
     dio.options = BaseOptions(

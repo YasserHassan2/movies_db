@@ -1,5 +1,8 @@
 class Constants {
-  static const String baseUrl = "https://test.kafiil.com";
+  static const String baseUrl = "https://api.themoviedb.org";
+  static const String accessToken =
+      "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMDA0ZDExN2FjMGIwNGUxMGRlNmRmOGEwZjNiMjM1OCIsInN1YiI6IjY1OWRjNGM0Nzc3NmYwMDIwMTNiMjYyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cOtceq_yTy-8yLaBcbp7oUoi44Vm5lTfmeDM1O-2rkc";
+  static const String imagePath = "https://image.tmdb.org/t/p/w500";
   static const String empty = "";
   static const String token = "";
   static const int zero = 0;
@@ -25,20 +28,6 @@ class UserTypeConstants {
 }
 
 class Endpoints {
-  static const String login = "/api/test/user/login";
-  static const String registration = "/api/test/user/register";
-  static const String countries = "/api/test/country";
-  static const String lookups = "/api/test/dependencies";
-  static const String whoAmI = "/api/test/user/who-am-i";
-  static const String services = "/api/test/service";
-  static const String popularServices = "/api/test/service/popular";
+  static const String popularMovies = "/3/movie/popular";
 
-  static const List<String> cancelTokenApis = [
-    login,
-    registration,
-    countries,
-    lookups,
-    services,
-    popularServices
-  ];
 }

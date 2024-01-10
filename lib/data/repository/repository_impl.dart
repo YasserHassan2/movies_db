@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:victory_link_movies/domain/model/popular_movies_model.dart';
+import 'package:victory_link_movies/domain/requests/popular_movies_request.dart';
 
 import '../../domain/repository/repository.dart';
-import '../../domain/requests/login_request.dart';
-import '../../domain/requests/register_request.dart';
 import '../data_source/local_data_source.dart';
 import '../data_source/remote_data_source.dart';
 import '../network/error_handler.dart';
@@ -19,4 +19,27 @@ class RepositoryImpl implements Repository {
   RepositoryImpl(
       this._remoteDataSource, this._networkInfo, this._localDataSource);
 
+  @override
+  Future<Either<Failure, PopularMoviesModel>> getPopularMovies(
+      PopularMoviesRequest popularMoviesRequest) async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet, its safe to call API
+      try {
+        final response = await _remoteDataSource.getPopularMovies(popularMoviesRequest);
+
+        if (response.success == null || response.success != false) {
+          return Right(response);
+        } else {
+          return Left(Failure(ApiInternalStatus.FAILURE,
+              response.statusMessage ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // return internet connection error
+      // return either left
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

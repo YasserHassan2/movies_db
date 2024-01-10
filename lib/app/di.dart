@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:victory_link_movies/domain/usecase/popular_movies_usecase.dart';
 
 import '../data/data_source/local_data_source.dart';
 import '../data/data_source/remote_data_source.dart';
@@ -50,3 +51,9 @@ Future<void> initAppModule() async {
       () => RepositoryImpl(instance(), instance(), instance()));
 }
 
+initMainModule() {
+  if (!GetIt.I.isRegistered<PopularMoviesUseCase>()) {
+    instance.registerFactory<PopularMoviesUseCase>(
+        () => PopularMoviesUseCase(instance()));
+  }
+}

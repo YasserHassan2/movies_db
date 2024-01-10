@@ -1,7 +1,10 @@
 {
   "en": "English",
   "ar": "Arabic",
-  "app_name": "Kafil Hiring",
+  "app_name": "VLMovies",
+  "popularMovies": "Popular Movies",
+  "searchForMovie": "Search for movie",
+  "searchHere": "search here",
   "loading": "Loading",
   "ok": "Ok",
   "retryAgain": "Retry again",
