@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:victory_link_movies/domain/usecase/movie_details_usecase.dart';
 import 'package:victory_link_movies/domain/usecase/popular_movies_usecase.dart';
+import 'package:victory_link_movies/domain/usecase/search_movies_usecase.dart';
 
 import '../data/data_source/local_data_source.dart';
 import '../data/data_source/remote_data_source.dart';
@@ -55,5 +56,16 @@ initMainModule() {
   if (!GetIt.I.isRegistered<PopularMoviesUseCase>()) {
     instance.registerFactory<PopularMoviesUseCase>(
         () => PopularMoviesUseCase(instance()));
+  }
+  if (!GetIt.I.isRegistered<SearchMoviesUseCase>()) {
+    instance.registerFactory<SearchMoviesUseCase>(
+        () => SearchMoviesUseCase(instance()));
+  }
+}
+
+initMovieDetailsModule() {
+  if (!GetIt.I.isRegistered<MovieDetailsUseCase>()) {
+    instance.registerFactory<MovieDetailsUseCase>(
+        () => MovieDetailsUseCase(instance()));
   }
 }

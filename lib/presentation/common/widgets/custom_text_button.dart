@@ -59,7 +59,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
                     ((widget.onPressed != null)
                         ? ColorManager.buttonTextColor
                         : Colors.transparent)),
-            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s12))),
+            borderRadius: const BorderRadius.all(Radius.circular(AppSize.s6))),
         child: Center(
           child: widget.icon != null
               ? Padding(

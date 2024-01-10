@@ -25,6 +25,7 @@ class AppStrings {
   static const searchForMovie = "searchForMovie";
   static const movieDetails = "movieDetails";
   static const searchHere = "searchHere";
+  static const addToFav = "addToFav";
 
   static const gender = "gender";
   static const username = "username_hint";

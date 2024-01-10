@@ -1,5 +1,6 @@
 class Constants {
   static const String baseUrl = "https://api.themoviedb.org";
+  static const String apiKey = "2004d117ac0b04e10de6df8a0f3b2358";
   static const String accessToken =
       "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMDA0ZDExN2FjMGIwNGUxMGRlNmRmOGEwZjNiMjM1OCIsInN1YiI6IjY1OWRjNGM0Nzc3NmYwMDIwMTNiMjYyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cOtceq_yTy-8yLaBcbp7oUoi44Vm5lTfmeDM1O-2rkc";
   static const String imagePath = "https://image.tmdb.org/t/p/w500";
@@ -29,5 +30,7 @@ class UserTypeConstants {
 
 class Endpoints {
   static const String popularMovies = "/3/movie/popular";
+  static const String searchMovies = "/3/search/movie";
+  static const String movieDetails = "/3/movie/";
 
 }

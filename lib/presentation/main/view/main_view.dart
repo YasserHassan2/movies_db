@@ -1,14 +1,16 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:victory_link_movies/app/constants.dart';
 import 'package:victory_link_movies/domain/model/popular_movies_model.dart';
 import 'package:victory_link_movies/presentation/common/widgets/custom_network_image_widget.dart';
+import 'package:victory_link_movies/presentation/movie_details/view/movie_details_view.dart';
 
 import '../../../utils/dialogs/custom_dialog.dart';
 import '../../../utils/resources/color_manager.dart';
 import '../../../utils/resources/font_manager.dart';
+import '../../../utils/resources/routes_manager.dart';
 import '../../../utils/resources/strings_manager.dart';
 import '../../../utils/resources/styles_manager.dart';
 import '../../../utils/resources/values_manager.dart';
@@ -53,6 +55,13 @@ class _MainViewState extends State<MainView> {
   }
 
   @override
+  void dispose() {
+    EasyDebounce.cancel('search-debouncer');
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       pageBuilder: PageBuilder(
@@ -80,6 +89,16 @@ class _MainViewState extends State<MainView> {
           currentPageNumber++;
           popularMoviesModel = state.popularMoviesModel;
           movies.addAll(popularMoviesModel!.results);
+        }
+        if (state is MainSearchSuccess) {
+          if (state.popularMoviesModel.results.isNotEmpty) {
+            popularMoviesModel = state.popularMoviesModel;
+            movies.clear();
+            movies.addAll(popularMoviesModel!.results);
+          } else {
+            BlocProvider.of<MainBloc>(context)
+                .add(getPopularMovies(currentPageNumber));
+          }
         }
         if (state is MainFailure) {
           CustomDialog(context).showErrorDialog('', '', state.message);
@@ -114,7 +133,12 @@ class _MainViewState extends State<MainView> {
                   Icons.search,
                   color: ColorManager.black,
                 ),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  EasyDebounce.debounce(
+                      'search-debouncer', Duration(milliseconds: 1000), () {
+                    BlocProvider.of<MainBloc>(context).add(searchMovies(value));
+                  });
+                },
               ),
               popularMoviesModel != null
                   ? Expanded(child: MoviesListWidget(movies))
@@ -136,47 +160,53 @@ class _MainViewState extends State<MainView> {
   }
 
   Widget MovieItemWidget(Movie movie) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: ColorManager.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, Routes.movieDetails,
+            arguments: MovieDetailsArguments(movie.id.toString()));
+      },
+      child: Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              width: AppSize.s90,
+              child: CustomNetworkImageWidget(
+                  imageUrl: Constants.imagePath + (movie.posterPath ?? "")),
             ),
-            width: AppSize.s90,
-            child: CustomNetworkImageWidget(
-                imageUrl: Constants.imagePath + movie.posterPath),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    movie.title,
-                    textAlign: TextAlign.start,
-                    style: getRegularStyle(
-                        color: ColorManager.black, fontSize: FontSize.s14),
-                  ),
-                  Text(
-                    movie.title,
-                    textAlign: TextAlign.start,
-                    style: getRegularStyle(
-                        color: ColorManager.black, fontSize: FontSize.s12),
-                  ),
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      movie.title ?? "",
+                      textAlign: TextAlign.start,
+                      style: getRegularStyle(
+                          color: ColorManager.black, fontSize: FontSize.s14),
+                    ),
+                    Text(
+                      movie.overview ?? "",
+                      textAlign: TextAlign.start,
+                      style: getRegularStyle(
+                          color: ColorManager.black, fontSize: FontSize.s12),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

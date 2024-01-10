@@ -8,14 +8,19 @@ class MainInitial extends MainState {}
 class MainLoading extends MainState {}
 
 class MainSuccess extends MainState {
-  PopularMoviesModel popularMoviesModel;
+  final PopularMoviesModel popularMoviesModel;
 
   MainSuccess(this.popularMoviesModel);
 }
+class MainSearchSuccess extends MainState {
+  final PopularMoviesModel popularMoviesModel;
+
+  MainSearchSuccess(this.popularMoviesModel);
+}
 
 class MainFailure extends MainState {
-  String message;
-  String code;
+  final String message;
+  final String code;
 
   MainFailure(this.message, this.code);
 }

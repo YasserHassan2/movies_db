@@ -22,16 +22,16 @@ class _AppServiceClient implements AppServiceClient {
 
   @override
   Future<PopularMoviesModel> popularMovies(
-    pageNumber,
+    page,
     language,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'page': pageNumber,
-      'language': language,
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'language': language,
     };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<PopularMoviesModel>(Options(
       method: 'GET',
@@ -46,6 +46,60 @@ class _AppServiceClient implements AppServiceClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PopularMoviesModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PopularMoviesModel> searchMovies(
+    query,
+    api_key,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'query': query,
+      r'api_key': api_key,
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<PopularMoviesModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/3/search/movie',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PopularMoviesModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> movieDetails(
+    movieId,
+    api_key,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': api_key};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/3/movie/${movieId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 

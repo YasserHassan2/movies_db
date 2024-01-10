@@ -4,7 +4,7 @@ import '../../../utils/resources/assets_manager.dart';
 import '../../../utils/resources/color_manager.dart';
 
 class CustomNetworkImageWidget extends StatefulWidget {
-  String imageUrl;
+  final String imageUrl;
 
   CustomNetworkImageWidget({required this.imageUrl});
 
@@ -19,9 +19,9 @@ class _CustomNetworkImageWidgetState extends State<CustomNetworkImageWidget> {
     return Container(
         child: FadeInImage(
       image: NetworkImage(widget.imageUrl),
-      placeholder: AssetImage(ImageAssets.appIcon),
+      placeholder: AssetImage(ImageAssets.vlLogo),
       imageErrorBuilder: (context, error, stackTrace) {
-        return Image.asset(ImageAssets.appIcon,
+        return Image.asset(ImageAssets.vlLogo,
             color: ColorManager.splashBGColor, fit: BoxFit.fitWidth);
       },
       fit: BoxFit.fitWidth,

@@ -3,7 +3,8 @@ const String jsonPath = "assets/json";
 
 class ImageAssets {
 
-  static const String appIcon = "$imagePath/app_icon.jpeg";
+
+  static const String vlLogo = "$imagePath/victorylink_logo.png";
   static const String onBoarding = "$imagePath/into.png";
   static const String avatarPlaceHolder = "$imagePath/avatar_placeholder.png";
   static const String login_gc = "$imagePath/login_gc.png";

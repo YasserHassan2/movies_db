@@ -1,3 +1,5 @@
+import 'dart:core';
+import 'dart:core';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -15,8 +17,19 @@ abstract class AppServiceClient {
 
   @GET(Endpoints.popularMovies)
   Future<PopularMoviesModel> popularMovies(
-    @Field("page") int pageNumber,
-    @Field("language") String language,
+    @Query('page') int page,
+    @Query('language') String language,
   );
 
+  @GET(Endpoints.searchMovies)
+  Future<PopularMoviesModel> searchMovies(
+    @Query('query') String query,
+    @Query('api_key') String api_key,
+  );
+
+  @GET("${Endpoints.movieDetails}{movieId}")
+  Future<dynamic> movieDetails(
+    @Path('movieId') String movieId,
+    @Query('api_key') String api_key,
+  );
 }
