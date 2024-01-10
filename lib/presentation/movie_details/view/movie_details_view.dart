@@ -77,6 +77,12 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
         if (state is MovieDetailsSuccess) {
           this.movie = state.movie;
         }
+        if (state is AddedToFavouritesSuccess) {
+          CustomDialog(context).showSuccessDialog(
+              '', '', AppStrings.addedToFavSuccess.tr(), onBtnPressed: () {
+            Navigator.pop(context);
+          });
+        }
         if (state is MovieDetailsFailure) {
           CustomDialog(context).showErrorDialog('', '', state.message);
         }
@@ -89,10 +95,11 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
               Center(
                 child: Container(
                   width: AppSize.s160,
-                  height: AppSize.s160,
+                  height: AppSize.s190,
                   child: CustomNetworkImageWidget(
-                    imageUrl: Constants.imagePath +
-                        (movie?.posterPath.toString() ?? ""),
+                    imageUrl: movie != null
+                        ? Constants.imagePath + movie!.posterPath.toString()
+                        : "",
                   ),
                 ),
               ),
@@ -111,12 +118,18 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                     color: ColorManager.white, fontSize: FontSize.s14),
               ),
               Spacer(),
-              CustomTextButton(
-                text: AppStrings.addToFav.tr(),
-                borderColor: Colors.transparent,
-                textColor: ColorManager.primary,
-                backgroundColor: ColorManager.supportTextColor,
-                onPressed: () {},
+              Visibility(
+                visible: movie != null,
+                child: CustomTextButton(
+                  text: AppStrings.addToFav.tr(),
+                  borderColor: Colors.transparent,
+                  textColor: ColorManager.primary,
+                  backgroundColor: ColorManager.supportTextColor,
+                  onPressed: () {
+                    BlocProvider.of<MovieDetailsBloc>(context)
+                        .add(addMovieToFavourites(movie!));
+                  },
+                ),
               ),
             ],
           ),
@@ -128,5 +141,6 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
 
 class MovieDetailsArguments {
   String movieId;
+
   MovieDetailsArguments(this.movieId);
 }

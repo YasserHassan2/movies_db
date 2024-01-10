@@ -13,6 +13,10 @@ class MovieDetailsSuccess extends MovieDetailsState {
   MovieDetailsSuccess(this.movie);
 }
 
+class AddedToFavouritesSuccess extends MovieDetailsState {
+  AddedToFavouritesSuccess();
+}
+
 class MovieDetailsFailure extends MovieDetailsState {
   final String message;
   final String code;
