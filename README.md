@@ -1,16 +1,12 @@
-# movies_db_app
+A Flutter application that fetches popular movies from rest api and lists them, able to view movie details by getting its data from rest api and saving it in favourites which is handled by local database and here the used technologies that i used while developing the app.
+clean architecture for (separation of concerns,testability, scalability) of the project and more..
+used pattern ( Singleton-MVVM ).
+get_it for dependency injection
+bloc for state management.
+floor for local database.
+support multi language (arabic-english) using easy localization and phonex.
+retrofit and dio for rest apis requests.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Thanks for your feedback
+Yasser Hassan
+Senior Mobile Software Engineer
